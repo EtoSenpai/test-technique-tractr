@@ -3,14 +3,20 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { FindOneParams } from '../../utils/findOneParams';
+import console from 'console';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  async findAll() {
+  async findAll(){
     return this.productService.findAll();
+  }
+
+  @Get('Research')
+  async findAllFilter(@Param('where') where, @Param('orderBy') orderBy){
+    /*return this.productService.findAllFilter(where);*/
   }
  
   @Get(':id')

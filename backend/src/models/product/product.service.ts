@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Product } from '@prisma/client';
+import { Product, Prisma} from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { ProductNotFoundException } from '../../exceptions/productNotFound.exception';
 import { PrismaError } from '../../utils/prismaError';
@@ -19,6 +19,14 @@ export class ProductService {
 
   async findAll(): Promise<Product[]>  {
     return await this.prismaService.product.findMany({});
+  }
+
+  async findAllFilter(params: {where?: Prisma.ProductWhereInput; orderBy?: Prisma.ProductOrderByInput;}): Promise<Product[]> {
+    const { where, orderBy } = params;
+    return await this.prismaService.product.findMany({
+      where,
+      orderBy
+    });
   }
 
   async findOne(id: number): Promise<Product | null> {

@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <add/>
   </div>
 </template>
 
 <script>
+  import add from '../components/add.vue'
+  
   export default {
-    name: 'App'
+    name: 'Add',
+    components: {
+      add
+    }
   }
 </script>
 
@@ -15,3 +20,4 @@
     font-family: butler;
     src: local("butler/Butler_Stencil/Butler_Regular_Stencil")
   }
+</style>

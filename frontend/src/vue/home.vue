@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <home/>
   </div>
 </template>
 
 <script>
+  import home from '../components/home.vue'
+  
   export default {
-    name: 'App'
+    name: 'Home',
+    components: {
+      home
+    }
   }
 </script>
 
@@ -15,3 +20,4 @@
     font-family: butler;
     src: local("butler/Butler_Stencil/Butler_Regular_Stencil")
   }
+</style>
