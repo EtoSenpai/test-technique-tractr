@@ -62,6 +62,7 @@
                 window.location.href = "http://localhost:8080/add";
             },
             Research(){
+                /*
                 this.product = []
                 const params = new URLSearchParams([['name', this.whereName], ['prix', parseInt(this.wherePrix)], ['order', this.order]]);
                 axios.get('http://localhost:3000/Product/Research', { params }).then((r) => {
@@ -77,6 +78,7 @@
                 }).catch((error) => {
                     swal('', error.response.data.message, "error");
                 });
+                */
             },
             detail(id){
                window.location.href = "http://localhost:8080/detail/"+id;
