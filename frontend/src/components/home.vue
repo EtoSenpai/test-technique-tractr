@@ -3,15 +3,19 @@
        <h2>Product</h2>
 
        <form class="research" v-on:submit.prevent>
+           <label for="whereName"> Name : </label>
+            <input id="whereName" type ="text" name="whereName" v-model="whereName">
+
             <label for="wherePrix"> Prix : </label>
             <input id="wherePrix" type ="number" name="wherePrix" v-model="wherePrix">
 
             <label for="order">Order by :</label>
             <select name="order" id="order" v-model="order">
-                <option value="DESC">descending</option>
-                <option value="ASC">ascending</option>
+                <option value="desc">descending</option>
+                <option value="asc">ascending</option>
             </select>
             <button type="submit" class="btnResearch" id="btnResearch" name="btnResearch" v-on:click="Research()">Research</button>
+            <button type="submit" class="btnGoAdd" id="btnGoAdd" name="btnGoAdd" v-on:click="GoAdd()">Add a product</button>
        </form>
 
         <div class="main">
@@ -38,9 +42,10 @@
         },
         data () {
             return {
+                whereName:"",
                 product: [],
                 wherePrix:0,
-                order:"DESC",
+                order:"desc",
             }
         },
         watch: {
@@ -53,9 +58,12 @@
                 }
                return c;
             },
+            GoAdd(){
+                window.location.href = "http://localhost:8080/add";
+            },
             Research(){
                 this.product = []
-                const params = new URLSearchParams([['where', this.wherePrix], ['orderBy', this.order]]);
+                const params = new URLSearchParams([['name', this.whereName], ['prix', parseInt(this.wherePrix)], ['order', this.order]]);
                 axios.get('http://localhost:3000/Product/Research', { params }).then((r) => {
                     if(r.status== 200){
                         if(r.data.length != 0){
@@ -116,13 +124,13 @@
         margin: 0px;
     }
     
-    #wherePrix{
+    #wherePrix, #whereName{
         width: 100px !important;
         padding: 0px 0px !important;
         margin-right: 10px;
     }
 
-    #btnResearch{
+    #btnResearch, .btnGoAdd{
         padding: 2px 16px !important;
         font-size: 13px !important;
         margin-left: 10px;

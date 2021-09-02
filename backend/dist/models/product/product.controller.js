@@ -23,9 +23,13 @@ let ProductController = class ProductController {
         this.productService = productService;
     }
     async findAll() {
-        return this.productService.findAll();
+        return this.productService.findAll({});
     }
-    async findAllFilter(where, orderBy) {
+    async findAllFilter(name, prix, order) {
+        return this.productService.findAll({
+            where: { name: String(name), prix: Number(prix) },
+            orderBy: { id: order }
+        });
     }
     async findOne({ id }) {
         return this.productService.findOne(Number(id));
@@ -47,11 +51,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findAll", null);
 __decorate([
-    common_1.Get('Research'),
-    __param(0, common_1.Param('where')),
-    __param(1, common_1.Param('orderBy')),
+    common_1.Get('Research/?'),
+    __param(0, common_1.Query('name')),
+    __param(1, common_1.Query('prix')),
+    __param(2, common_1.Query('order')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [String, Number, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findAllFilter", null);
 __decorate([

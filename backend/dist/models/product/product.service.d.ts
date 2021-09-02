@@ -6,8 +6,10 @@ export declare class ProductService {
     private prismaService;
     constructor(prismaService: PrismaService);
     create(createProductDto: CreateProductDto): Promise<Product>;
-    findAll(): Promise<Product[]>;
-    findAllFilter(params: {
+    findAll(params: {
+        skip?: number;
+        take?: number;
+        cursor?: Prisma.ProductWhereUniqueInput;
         where?: Prisma.ProductWhereInput;
         orderBy?: Prisma.ProductOrderByInput;
     }): Promise<Product[]>;

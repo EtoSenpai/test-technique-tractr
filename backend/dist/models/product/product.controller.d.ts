@@ -6,7 +6,7 @@ export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
     findAll(): Promise<import(".prisma/client").Product[]>;
-    findAllFilter(where: any, orderBy: any): Promise<void>;
+    findAllFilter(name: string, prix: number, order: any): Promise<import(".prisma/client").Product[]>;
     findOne({ id }: FindOneParams): Promise<import(".prisma/client").Product>;
     create(product: CreateProductDto): Promise<import(".prisma/client").Product>;
     update({ id }: FindOneParams, product: UpdateProductDto): Promise<import(".prisma/client").Product>;

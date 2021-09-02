@@ -24,14 +24,14 @@ let ProductService = class ProductService {
             data: createProductDto,
         });
     }
-    async findAll() {
-        return await this.prismaService.product.findMany({});
-    }
-    async findAllFilter(params) {
-        const { where, orderBy } = params;
+    async findAll(params) {
+        const { skip, take, cursor, where, orderBy } = params;
         return await this.prismaService.product.findMany({
+            skip,
+            take,
+            cursor,
             where,
-            orderBy
+            orderBy,
         });
     }
     async findOne(id) {

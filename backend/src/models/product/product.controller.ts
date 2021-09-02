@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Param, Delete, Put} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Query} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { FindOneParams } from '../../utils/findOneParams';
-import console from 'console';
+import { query } from 'express';
 
 @Controller('product')
 export class ProductController {
@@ -11,12 +11,15 @@ export class ProductController {
 
   @Get()
   async findAll(){
-    return this.productService.findAll();
+    return this.productService.findAll({});
   }
 
-  @Get('Research')
-  async findAllFilter(@Param('where') where, @Param('orderBy') orderBy){
-    /*return this.productService.findAllFilter(where);*/
+  @Get('Research/?')
+  async findAllFilter(@Query('name') name:string, @Query('prix') prix:number, @Query('order') order){
+    return this.productService.findAll({
+      where: { name: String(name), prix: Number(prix)},
+      orderBy:{ id: order} 
+    });
   }
  
   @Get(':id')

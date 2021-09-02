@@ -17,15 +17,20 @@ export class ProductService {
     });
   }
 
-  async findAll(): Promise<Product[]>  {
-    return await this.prismaService.product.findMany({});
-  }
-
-  async findAllFilter(params: {where?: Prisma.ProductWhereInput; orderBy?: Prisma.ProductOrderByInput;}): Promise<Product[]> {
-    const { where, orderBy } = params;
+  async findAll(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.ProductWhereUniqueInput;
+    where?: Prisma.ProductWhereInput;
+    orderBy?: Prisma.ProductOrderByInput;
+  }): Promise<Product[]>  {
+    const { skip, take, cursor, where, orderBy } = params;
     return await this.prismaService.product.findMany({
+      skip,
+      take,
+      cursor,
       where,
-      orderBy
+      orderBy,
     });
   }
 
